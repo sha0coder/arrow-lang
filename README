@@ -1,0 +1,7 @@
+Why arrow?
+    - maximum productivity
+    - multiplatform
+    - no overflows (even python could have overflows on its c code or c libs)
+    - fully implemented in golang
+    - no bison/flex more speed and less potential vulns
+    - fast interpreted

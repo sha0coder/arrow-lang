@@ -1,0 +1,91 @@
+- mas validaciones de parametros en las funciones
+- _ inicializado a argv
+- sockets
+- ignorecase como?
+- split con regex ??
+
+
+regex:
+    - get
+    - if
+
+
+- arrays init
+- mas funciones
+- en lugar de usar _ guardar la variable en go
+
+    "asdf" -> $a
+    "asdf" ---> last='"asdf"'
+    linea nueva borra el last
+
+
+
+
+
+
+-------------------
+- testear bien concatenaciones y operaciones
+- coments
+- arrays
+- special vars:
+    $col -> /[ \t]*/ 
+    $sep -> ,
+    $_code  (filled by url)
+    $_sz (filled automatically by url, file, string)
+    $i  (element num on iteraions with => or *=>)
+    $_  last output  lastElem
+  
+- arguments: $1 $2 $3 ??
+
+- incrementos i++ i+=  por ahora  ($i+) -> _>$i
+
+
+
+- ahorro de conversiones extras
+    - el if sabe de antemano si es int o string, no intentar convertir los strings, esto permite controlar mejor los erorres
+
+- more functions
+    round
+    cut
+    row
+    split
+    join
+
+- else
+
+- soportar hexa
+
+- iterator
+
+3 -> iter -> 
+=>3 ->  $i -> out
+$html=>
+
+Split Iterate:
+
+numeric var o num => $i 
+
+
+$html => "\n" ->  
+
+1,2,3 -> $a
+$a => "," ->
+
+- json support
+
+- async iterator
+*=>
+- spawn commands
+
+!ls -> $files => $file -> out
+rm $file
+
+o especificar ejecucion:
+
+`ls` ->
+
+
+- urls 
+- files
+http://lala.com -> $a -> ($a.sz == 0) -> end |-> ./test
+
