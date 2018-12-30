@@ -15,8 +15,9 @@ func ResolveStr(tok string, l int, t int) string {
 
 	for i := 0; i < len(tok); i++ {
 
-		// enable var mode on $ except \$
-		if !varMode && tok[i] == '$' {
+		// enable var mode on $ except \$ and ending $
+		if !varMode && i < len(tok)-2 && tok[i] == '$' {
+			//fmt.Printf("entra  %s   %d %d \n", tok, i, len(tok))
 			if i == 0 || (i > 0 && tok[i-1] != '\\') {
 				varMode = true
 				varName = ""

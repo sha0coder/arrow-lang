@@ -43,6 +43,16 @@ func CallFunc(p []string, l int, t int) bool {
 			Trace(l, t, "calling sz")
 			return true
 		}
+	case "int":
+		{
+			PY.Push("_=int(_)")
+			return true
+		}
+	case "str":
+		{
+			PY.Push("_=str(_)")
+			return true
+		}
 	case "end":
 		{
 			PY.Push("sys.exit(1)") //TODO: que no sea necesario pasarle un numero
@@ -54,7 +64,7 @@ func CallFunc(p []string, l int, t int) bool {
 			PY.Push("pass")
 			return true
 		}
-	case "get":
+	case "extract":
 		{
 			if len(p) != 2 {
 				Error(l, t, "get requires one arg with an regexp")
@@ -78,7 +88,14 @@ func CallFunc(p []string, l int, t int) bool {
 			return true
 		}
 
-	case "post":
+	case "get": // http get
+		{
+			PY.Push("_res = requests.get(_,headers={'UserAgent':_ua})")
+			PY.Push("_code = _res.status_code; _sz = len(_res.text); _ = _res.text")
+			return true
+		}
+
+	case "post": // http post
 		{
 			if len(p) != 2 {
 				Error(l, t, "post requires one string argument")
@@ -93,11 +110,13 @@ func CallFunc(p []string, l int, t int) bool {
 
 	case "load":
 		{
-			PY.Push("__=_;fd=open(__);_=fd.read();fd.close()")
+			PY.Push("__=_;fd=open(__,'rb');_=fd.read();fd.close()")
+			return true
 		}
 	case "save":
 		{
-			PY.Push("fd=open(" + ResolveStr(p[1], l, t) + ");_=fd.read();fd.close()")
+			PY.Push("fd=open(" + ResolveStr(p[1], l, t) + ",'w+');fd.write(_);fd.close()")
+			return true
 		}
 
 	case "rand":
@@ -121,22 +140,19 @@ func CallFunc(p []string, l int, t int) bool {
 			PY.Push("_ = random.randint(" + p[1] + "," + p[2] + ")")
 			return true
 		}
+	case "ret":
 	case "return":
 		{
 			PY.Push("return _")
 			return true
 		}
-
+	case "brk":
 	case "break":
 		{
 			PY.Push("break")
 			return true
 		}
 	case "cont":
-		{
-			PY.Push("continue")
-			return true
-		}
 	case "continue":
 		{
 			PY.Push("continue")
@@ -219,6 +235,18 @@ func CallFunc(p []string, l int, t int) bool {
 			}
 			PY.Push("__=_")
 			PY.Push("_ = __.split(" + p[1] + ")")
+			PY.Push("if _[-1] == '':")
+			PY.Push("    _.pop()")
+			//PY.Push("_ = filter(lambda x: x != '' ,__.split(" + p[1] + "))")
+			return true
+		}
+
+	case "lines":
+		{
+			PY.Push("__=_")
+			PY.Push("_ = __.split('\\n')")
+			PY.Push("if _[-1] == '':")
+			PY.Push("    _.pop()")
 			return true
 		}
 
@@ -231,15 +259,17 @@ func CallFunc(p []string, l int, t int) bool {
 			PY.Push(arr + ".append(_); _=" + arr)
 			return true
 		}
+
 	case "pop":
 		{
 			if len(p) != 2 {
 				Error(l, t, "SPLIT function need one string argument, and none argumets where given")
 			}
-			if p[1][0] != '$' {
-				Error(l, t, "POP needs an array parameter")
-			}
-			arr := p[1][1:]
+			/*
+				if p[1][0] != '$' {
+					Error(l, t, "POP needs an array parameter")
+				}*/
+			arr := p[1]
 			PY.Push("_ = " + arr + ".pop()")
 			return true
 		}

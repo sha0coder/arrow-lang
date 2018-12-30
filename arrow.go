@@ -301,7 +301,9 @@ func main() {
 					tok = ResolveStr("'"+tok[1:]+"'", i, j)
 					PY.Push("__=_")
 					PY.Push("_p = subprocess.Popen(" + tok + ",shell=True,stdout=subprocess.PIPE,stdin=subprocess.PIPE)")
-					PY.Push("_p.stdin.write(_); _p.stdin.close()")
+					if j > 0 {
+						PY.Push("_p.stdin.write(_); _p.stdin.close()")
+					}
 					PY.Push("_ = _p.stdout.read()")
 					PY.Push("_p.wait()")
 				}
@@ -367,5 +369,5 @@ func main() {
 	//PY.Print()
 	PY.Write(fname)
 	fmt.Println("./" + fname)
-	//PY.Exec()
+	PY.Exec()
 }
