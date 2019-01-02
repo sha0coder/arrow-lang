@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"os"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -37,6 +38,7 @@ func Error(line int, token int, msg string) {
 }
 
 func main() {
+	var reglen = regexp.MustCompile("\\$[a-zA-Z0-9_]+_sz\\$?")
 
 	if len(os.Args) < 2 {
 		fmt.Printf("USAGE:\n  %s [source code file]  <trace>", os.Args[0])
@@ -80,6 +82,20 @@ func main() {
 			tok = strings.TrimRight(tok, " ")
 			ty := GetTokType(tok)
 
+			// resolve _sz on vars
+			for _, match := range reglen.FindAllStringSubmatchIndex(tok, -1) {
+				b := match[0] + 1
+				e := match[1]
+				e2 := e - 3
+
+				if tok[e-1] == '$' {
+					e--
+					e2--
+				}
+
+				PY.Push(tok[b:e] + " = len(" + tok[b:e2] + ")")
+			}
+
 			switch ty {
 
 			case TokVar:
@@ -89,7 +105,6 @@ func main() {
 					} else {
 						PY.Push(fmt.Sprintf("%s=_", tok[1:]))
 					}
-
 				}
 
 			case TokStr:

@@ -29,7 +29,9 @@ func NumType(b byte) int {
 
 func ResolveNum(tok string, l int, t int) string {
 	return strings.Replace(tok, "$", "", -1)
-} /*
+} 
+
+/*
 	num := ResolveStr(tok, l, t)
 
 	var faccum float32 = 0
