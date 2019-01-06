@@ -15,7 +15,7 @@ rand 1 100 -> $guessme
     [$num < $guessme]
         "the number is bigger" -> print
     
-    ; lets do an else with []
+    ; else
     []
         "the number is lower" -> print
 
