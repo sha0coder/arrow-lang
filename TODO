@@ -1,6 +1,8 @@
-- probar "a -> b" -> c
+
 
 - macros
+- date and times
+    function now (time.ctime()) and time time.localtime()
 
 
 - mas validaciones de parametros en las funciones
@@ -13,7 +15,7 @@
 
 
 - mejorar la terminacion de la variable para no necesitar hacer $var$ 
-
+- probar "a -> b" -> c
 - mas funciones
 - en lugar de usar _ guardar la variable en go
 

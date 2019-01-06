@@ -87,3 +87,17 @@ System shell:
     !ls -> $out -> ./files.txt
 
     "/etc/" -> $etc -> !ls $etc -> ./config_files.txt
+
+
+
+Check the examples:
+    
+    hello-world.arr
+    length.arr
+    iterators.arr
+    guess-numbers.arr
+    files-and-urls.arr
+    data-manipulation.arr
+    conditions.arr
+    shell-stuff.arr
+    check-linux-home.arr
