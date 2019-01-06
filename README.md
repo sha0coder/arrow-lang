@@ -7,7 +7,7 @@ Print:
     "hello world" -> print
     "hello world\n" -> out
     "input your name: " -> out -> in -> $name
-    "your noame is $name" -> print
+    "your name is $name" -> print
 
 
 Reading file:
