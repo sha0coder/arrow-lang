@@ -35,8 +35,8 @@ Urls:
 
 Infinite loop:
 
-=>
-    "test" -> print
+    =>
+        "test" -> print
 
 Iterate array:
 
