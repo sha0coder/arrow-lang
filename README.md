@@ -40,7 +40,7 @@ Infinite loop:
 
 Iterate array:
 
-    /etc/passwd -> split '\n' -> $pwds
+    /etc/passwd -> lines -> $pwds
     $pwds =>
         print
 
