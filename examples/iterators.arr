@@ -23,3 +23,8 @@
 ; commented just in case:
 ;=>
 ;    "endless loop, press control+C" -> print
+
+
+/etc/passwd -> $users
+$users =>
+    -> $user -> print

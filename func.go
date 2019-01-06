@@ -90,8 +90,11 @@ func CallFunc(p []string, l int, t int) bool {
 
 	case "get": // http get
 		{
-			PY.Push("_res = requests.get(_,headers={'UserAgent':_ua})")
-			PY.Push("_code = _res.status_code; _sz = len(_res.text); _ = _res.text")
+			PY.Push("try:")
+			PY.Push("    _res = requests.get(_,headers={'UserAgent':_ua})")
+			PY.Push("   _code = _res.status_code; _sz = len(_res.text); _ = _res.text; err=False")
+			PY.Push("except:")
+			PY.Push("    err=True; _code=0; _sz=0; _=''")
 			return true
 		}
 
@@ -103,8 +106,11 @@ func CallFunc(p []string, l int, t int) bool {
 			if p[1][0] != '\'' && p[1][0] != '"' {
 				Error(l, t, "invalid string on post")
 			}
-			PY.Push("_res = requests.post(" + p[1] + ",data=_,headers={'UserAgent':_ua})")
-			PY.Push("_code = res.status_code; _sz = len(_res.text); _ = _res.text")
+			PY.Push("try:")
+			PY.Push("    _res = requests.post(" + p[1] + ",data=_,headers={'UserAgent':_ua})")
+			PY.Push("    _code = res.status_code; _sz = len(_res.text); _ = _res.text; err=False")
+			PY.Push("except:")
+			PY.Push("    err=True; _code=0; _sz=0; _=''")
 			return true
 		}
 
@@ -113,6 +119,7 @@ func CallFunc(p []string, l int, t int) bool {
 			PY.Push("__=_;fd=open(__,'rb');_=fd.read();fd.close()")
 			return true
 		}
+
 	case "save":
 		{
 			PY.Push("fd=open(" + ResolveStr(p[1], l, t) + ",'w+');fd.write(_);fd.close()")

@@ -5,17 +5,10 @@
 - split con regex ??
 
 
-regex:
-    - get
-    - if
 
 
-implementar en el string parser:
-si se usa el _sz  se hace un len por ej     $a  $a_len -> a_len = len($a)
+- mejorar la terminacion de la variable para no necesitar hacer $var$ 
 
-
-
-- arrays init
 - mas funciones
 - en lugar de usar _ guardar la variable en go
 
