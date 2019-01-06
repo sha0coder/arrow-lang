@@ -73,9 +73,13 @@ loop asynchronously:
     <=:
 
 
+Check size:
 
+    "this is a test" -> $var
+    $var_sz -> print
 
-
+    list 1,2,3 -> $arr
+    $arr_sz -> print
 
 
 
