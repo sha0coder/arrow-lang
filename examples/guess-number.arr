@@ -1,3 +1,5 @@
+; This is the guess number game
+
 ; random number
 rand 1 100 -> $guessme
 
