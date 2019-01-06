@@ -6,5 +6,5 @@ $users =>
     [$home_sz > 0]
         !stat $home -> lines -> grep "Access" -> $out
         [$out_sz > 0]
-            $out[0] -> $perms
-            "$home $perms" -> print
+            $out[0] -> extract "\(([^)]+)\)" -> $perms
+            "$home$:    $perms[0]" -> print

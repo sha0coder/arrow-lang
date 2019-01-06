@@ -82,5 +82,8 @@ Check size:
     $arr_sz -> print
 
 
+System shell:
 
+    !ls -> $out -> ./files.txt
 
+    "/etc/" -> $etc -> !ls $etc -> ./config_files.txt
